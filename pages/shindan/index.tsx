@@ -4,12 +4,12 @@ import {DefaultLayout} from "../../layout/DefaultLayout";
 import {Button, Divider, Grid, Paper, Typography} from "@mui/material";
 import Link from "next/link";
 import {useAppDispatch} from "../../redux/hook";
-import {reset} from "../../redux/reducer/question";
+import {resetAnswers} from "../../redux/reducer/question";
 
 const Shindan: NextPage = () => {
     const dispatch = useAppDispatch();
     React.useEffect(() => {
-      dispatch(reset());
+      dispatch(resetAnswers());
     }, []);
 
 	return (
