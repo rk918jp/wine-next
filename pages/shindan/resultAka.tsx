@@ -1,9 +1,9 @@
 import React from "react";
 import {NextPage} from "next";
 import {DefaultLayout} from "../../layout/DefaultLayout";
-import {Button, Divider, Grid, Paper, Typography} from "@mui/material";
+import {Button, Divider, Grid, ImageList, ImageListItem, Paper, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../redux/hook";
-import {questionsDef, resultMessageDef, totalQuestionCount,resultImageDef} from "./consts";
+import {questionsDef, resultMessageDef, totalQuestionCount,resultImageDef} from "../../definitions/consts";
 import {answerQuestion} from "../../redux/reducer/question";
 import {useRouter} from "next/router";
 import Link from "next/link";
@@ -33,8 +33,12 @@ export const ResultAka: NextPage = () => {
 					<Typography variant={"h5"}>
 						<p>あなたにおすすめのワインは…</p>
 						{resultMessage}
-						{resultImage}
 					</Typography>
+                <ImageList cols={1}>
+                  <ImageListItem>
+                    <img src={resultImage} />
+                  </ImageListItem>
+                </ImageList>
 				<Grid container sx={{my: 4}} spacing={2}>
 					<Grid item xs={6}>
 						<Link href={"/shindan"}>
