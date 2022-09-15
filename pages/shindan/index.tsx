@@ -10,7 +10,7 @@ const Shindan: NextPage = () => {
     const dispatch = useAppDispatch();
     React.useEffect(() => {
       dispatch(reset());
-    });
+    }, []);
 
 	return (
 		<DefaultLayout>
