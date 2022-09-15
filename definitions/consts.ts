@@ -37,9 +37,9 @@ export const questionsDef = [
 	];
 
 	export const resultImageDef = [
-		'../../images/akawine00/jpeg',
-		"/images/akawine00/jpeg",
-		"/images/akawine00/jpeg",
-		"/images/akawine00/jpeg"
+		'/images/akawine00.jpeg',
+		"/images/akawine00.jpeg",
+		"/images/akawine00.jpeg",
+		"/images/akawine00.jpeg"
 		
 	];
