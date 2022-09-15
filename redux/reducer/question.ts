@@ -38,8 +38,11 @@ export const questionSlice = createSlice({   //createSlice=変数、初期値や
 					? 2
 						: 3;
 	},
-	}
+    resetAnswers: (state) => {
+      return initialState;
+    },
+  }
 })
 
-export const {answerQuestion} = questionSlice.actions;
+export const {answerQuestion, resetAnswers} = questionSlice.actions;
 export default questionSlice.reducer;
