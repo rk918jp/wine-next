@@ -30,16 +30,32 @@ export const questionsDef = [
 	export const totalQuestionCount = questionsDef.length;
 	
 	export const resultMessageDef = [
-		"〇〇産の深い旨味みの赤ワイン",
+		"〇〇産の深い旨味の赤ワイン",
 		"〇〇産のまろやか濃厚赤ワイン",
 		"〇〇産のがっしり渋み赤ワイン",
 		"〇〇産の華やかエレガント赤ワイン",
 	];
 
+	export const resultMessageShiroDef = [
+		"〇〇産のまろやか濃厚白ワイン",
+		"〇〇産のコク辛口白ワイン",
+		"〇〇産のきりっとシャープ白ワイン",
+		"〇〇産のソフト＆フルーティ白ワイン",
+	];
+
+
 	export const resultImageDef = [
-		'../../images/akawine00/jpeg',
-		"/images/akawine00/jpeg",
-		"/images/akawine00/jpeg",
-		"/images/akawine00/jpeg"
+		'/images/akawine00.jpeg',
+		"/images/akawine00.jpeg",
+		"/images/akawine00.jpeg",
+		"/images/akawine00.jpeg"
+		
+	];
+
+	export const resultImageShiroDef = [
+		'/images/shirowine00.jpeg',
+		"/images/shirowine00.jpeg",
+		"/images/shirowine00.jpeg",
+		"/images/shirowine00.jpeg"
 		
 	];

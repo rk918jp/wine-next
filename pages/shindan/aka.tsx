@@ -3,15 +3,17 @@ import {NextPage} from "next";
 import {DefaultLayout} from "../../layout/DefaultLayout";
 import {Button, CircularProgress, Divider, Grid, Paper, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../redux/hook";
-import {questionsDef, totalQuestionCount} from "./consts";
+import {questionsDef, totalQuestionCount} from "../../definitions/consts";
 import {answerQuestion} from "../../redux/reducer/question";
 import {useRouter} from "next/router";
+import Link from "next/link";
+import MediaQuery from "react-responsive";
 
 
 
 export const Aka: NextPage = () => {
 	const router = useRouter();
-	const questionNum = useAppSelector(state => state.question.questionNum);
+	const questionNum = useAppSelector((state: { question: { questionNum: number; }; }) => state.question.questionNum);
 	const dispatch = useAppDispatch();
 
 	  // 現在の質問(indexが配列長を超えた場合はundefined)
@@ -30,50 +32,121 @@ export const Aka: NextPage = () => {
 		}, [finished]);
 
 	return (
-		<DefaultLayout>
+		<DefaultLayout >
+			
+			
+			{/* PCの表示 */}
+			<MediaQuery query="(min-width: 768px)">
 			{/* 診断終了時の処理 */}
 			{finished ? (
 			<>
-				<Typography variant={"h5"}>
-					Done!
-				</Typography>
-				<CircularProgress sx={{mt: 3}} />
+				<div style={{position: "absolute" ,top: "50%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS", }}>
+					<Typography variant={"h5"} style={{fontSize: "3rem"}}>
+						Done!
+					</Typography>
+					<CircularProgress sx={{mt: 3}} />
+				</div>
 			</>
 			) : (
 			<>
-				<Typography variant={"h5"}>
-					質問({questionNum + 1}/{totalQuestionCount})  {/* 質問残数の表示 */}
-					</Typography>
-					<Divider sx={{mt: 2, mb: 4}}/>
-					<Typography variant={"h5"}>
-					{currentQuestion.q}  {/*  質問内容 */}
-					</Typography>
-					<Grid container sx={{mt: 4}} spacing={2}>
-						<Grid item xs={6}>
-							<Button
-								variant={"outlined"}
-								fullWidth
-								onClick={() => {
-								dispatch(answerQuestion({value: 1}));
-								}}
-							>
-							{currentQuestion.a1}  {/* 回答１ */}
-							</Button>
+				<div style={{
+					position: "absolute" ,
+					top: "50%", 
+					left: "50%", 
+					transform: "translate(-50%,-50%)",
+					fontFamily: "Comic Sans MS", 
+					}}>
+					<Typography variant={"h5"} style={{fontSize: "3rem"}}>
+						質問({questionNum + 1}/{totalQuestionCount})  {/* 質問残数の表示 */}
+						</Typography>
+						<Divider sx={{mt: 2, mb: 4}} />
+						<Typography variant={"h5"} style={{fontSize: "5rem"}}>
+						{currentQuestion.q}  {/*  質問内容 */}
+						</Typography>
+						<Grid container sx={{mt: 5}} spacing={2} style={{marginLeft: "auto",marginRight: "auto"}}>
+							<Grid item xs={6}>
+								<Button
+									variant={"outlined"}
+									fullWidth
+									onClick={() => {
+									dispatch(answerQuestion({value: 1}));
+									}}
+									style={{fontSize: "2rem"}}
+								>
+								{currentQuestion.a1}  {/* 回答１ */}
+								</Button>
+							</Grid>
+							<Grid item xs={6}>
+								<Button 
+									variant="contained"
+									fullWidth
+									onClick={() => {
+									dispatch(answerQuestion({value: 2}));
+									}}
+									style={{fontSize: "2rem"}}
+								>
+								{currentQuestion.a2}  {/* 回答２ */}
+								</Button>
+							</Grid>
 						</Grid>
-						<Grid item xs={6}>
-							<Button
-								variant={"outlined"}
-								fullWidth
-								onClick={() => {
-								dispatch(answerQuestion({value: 2}));
-								}}
-							>
-							{currentQuestion.a2}  {/* 回答２ */}
-							</Button>
-						</Grid>
-					</Grid>
+				</div>
 				</>
 			)}
+		</MediaQuery>
+
+
+		{/* Mobileの表示 */}
+		<MediaQuery query="(max-width: 767px)">
+			{/* 診断終了時の処理 */}
+			{finished ? (
+			<>
+				<div style={{position: "absolute" ,top: "50%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS", }}>
+					<Typography variant={"h5"} style={{fontSize: "3rem"}}>
+						Done!
+					</Typography>
+					<CircularProgress sx={{mt: 3}} />
+				</div>
+			</>
+			) : (
+			<>
+				<div style={{position: "absolute" ,top: "55%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS", }}>
+					<Typography variant={"h5"} style={{fontSize: "2rem", paddingTop: "40px"}}>
+						質問({questionNum + 1}/{totalQuestionCount})  {/* 質問残数の表示 */}
+						</Typography>
+						<Divider sx={{mt: 2, mb: 4}} />
+						<Typography variant={"h5"} style={{fontSize: "2.5rem"}}>
+						{currentQuestion.q}  {/*  質問内容 */}
+						</Typography>
+						<Grid container sx={{mt: 5}} spacing={1} style={{marginLeft: "auto",marginRight: "auto"}}>
+							<Grid item xs={60}>
+								<Button
+									variant={"outlined"}
+									fullWidth
+									onClick={() => {
+									dispatch(answerQuestion({value: 1}));
+									}}
+									style={{fontSize: "1.4rem"}}
+								>
+								{currentQuestion.a1}  {/* 回答１ */}
+								</Button>
+							</Grid>
+							<Grid item xs={60}>
+								<Button 
+									variant="contained"
+									fullWidth
+									onClick={() => {
+									dispatch(answerQuestion({value: 2}));
+									}}
+									style={{fontSize: "1.4rem"}}
+								>
+								{currentQuestion.a2}  {/* 回答２ */}
+								</Button>
+							</Grid>
+						</Grid>
+				</div>
+				</>
+			)}
+		</MediaQuery>
 
 		</DefaultLayout>
 

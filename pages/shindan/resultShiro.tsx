@@ -3,7 +3,7 @@ import {NextPage} from "next";
 import {DefaultLayout} from "../../layout/DefaultLayout";
 import {Button, Divider, Grid, ImageList, ImageListItem, Paper, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../redux/hook";
-import {questionsDef, resultMessageDef, totalQuestionCount,resultImageDef} from "../../definitions/consts";
+import {questionsDef, resultMessageShiroDef, totalQuestionCount,resultImageShiroDef} from "../../definitions/consts";
 import {answerQuestion} from "../../redux/reducer/question";
 import {useRouter} from "next/router";
 import Link from "next/link";
@@ -14,8 +14,8 @@ export const ResultAka: NextPage = () => {
 	const totalPoint = useAppSelector(state => state.question.totalPoint);  //totalPointにquestion＋totalPointを代入
 	const rank = useAppSelector(state => state.question.rank);  //rankにquestion＋rankを代入
 
-	const resultMessage = resultMessageDef?.[rank];  //rankに応じた結果の文言
-	const resultImage = resultImageDef?.[rank];
+	const resultMessage = resultMessageShiroDef?.[rank];  //rankに応じた結果の文言
+	const resultShiro = resultImageShiroDef?.[rank];   //rankに応じた結果のimage
 
 	//   /* 画面をリロードする関数 */
 	// 	const refreshPage = () => {
@@ -27,7 +27,7 @@ export const ResultAka: NextPage = () => {
 		<DefaultLayout>
 
 			{/* PCの表示 */}
-			<MediaQuery query="(min-width: 768px)">
+			<MediaQuery query="(min-width: 768px)">	
 				<div /* style={{position: "absolute" ,top: "55%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS", }} */
 				style={{width: "100%",top: "55%", left: "50%",}}>
 				<Paper sx={{padding: 5}}>
@@ -42,7 +42,7 @@ export const ResultAka: NextPage = () => {
 
 						<ImageList cols={1}>
 							<ImageListItem style={{width: "30%", margin: "0px auto",}}>
-								<img src={resultImage} />
+								<img src={resultShiro} />
 							</ImageListItem>
 						</ImageList>
 
@@ -50,8 +50,7 @@ export const ResultAka: NextPage = () => {
 						<Grid item xs={3} >
 							<Link href={"/shindan"}>
 								<Button
-									style={{fontSize: "1.8rem", color:"#fff", backgroundColor: "#DDA0DD", borderRadius: "100vh", padding:15, paddingRight:"50px", paddingLeft:"50px"}}
-									sx={{":hover":{opacity:0.8}}}>
+									style={{fontSize: "1.8rem", color:"#fff", backgroundColor: "#DDA0DD", borderRadius: "100vh", padding:15, paddingRight:"50px", paddingLeft:"50px"}}>
 									もう一度
 								</Button>
 							</Link>
@@ -59,8 +58,7 @@ export const ResultAka: NextPage = () => {
 						<Grid item xs={3} >
 							<Link href={"/"}>
 								<Button
-									style={{fontSize: "1.8rem", color:"#fff", backgroundColor: "#9370DB", borderRadius: "100vh", padding:15}}
-									sx={{":hover":{opacity:0.8}}}>
+									style={{fontSize: "1.8rem", color:"#fff", backgroundColor: "#9370DB", borderRadius: "100vh", padding:15}}>
 									トップページに戻る
 								</Button>
 							</Link>
@@ -71,9 +69,11 @@ export const ResultAka: NextPage = () => {
 			</MediaQuery>
 
 
+
+
 			{/* Mobileの表示 */}
 			<MediaQuery query="(max-width: 767px)">
-			<div /* style={{position: "absolute" ,top: "55%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS", }} */
+				<div /* style={{position: "absolute" ,top: "55%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS", }} */
 					style={{width: "100%",top: "55%", left: "50%",}}>
 					<Paper sx={{padding: 5}}>
 						<Typography variant={"h5"} style={{fontSize: "2rem"}}>
@@ -87,7 +87,7 @@ export const ResultAka: NextPage = () => {
 
 							<ImageList cols={1}>
 								<ImageListItem style={{width: "100%", margin: "0px auto",}}>
-									<img src={resultImage} />
+									<img src={resultShiro} />
 								</ImageListItem>
 							</ImageList>
 
@@ -114,6 +114,7 @@ export const ResultAka: NextPage = () => {
 			</MediaQuery>
 
 		</DefaultLayout>
+		
 	)
 }
 export default ResultAka;
