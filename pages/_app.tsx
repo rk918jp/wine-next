@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type {AppProps} from 'next/app'
 import {ThemeProvider} from "@mui/material";
-// import {theme} from "../theme";
+import {theme} from "../theme";
 import {CacheProvider} from "@emotion/react";
 import createEmotionCache from "../createEmotionCache";
 import {EmotionCache} from "@emotion/cache/dist/emotion-cache.cjs";
@@ -15,11 +15,11 @@ function MyApp({Component, pageProps, emotionCache = clientSideEmotionCache}: Ap
 }) {
   return (
       <CacheProvider value={emotionCache}>
-        {/* <ThemeProvider theme={theme}> */}
+         <ThemeProvider theme={theme}>
           <Provider store={store}>
             <Component {...pageProps} />
           </Provider>
-        {/* </ThemeProvider> */}
+         </ThemeProvider>
       </CacheProvider>
   )
 }
