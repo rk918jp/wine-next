@@ -7,7 +7,8 @@ import { relative } from 'path';
 import { useAppDispatch } from '../redux/hook';
 import { resetAnswers } from '../redux/reducer/question';
 import React from 'react';
-import MediaQuery from "react-responsive";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 
 const Home: NextPage = () => {
@@ -17,12 +18,15 @@ const Home: NextPage = () => {
   dispatch(resetAnswers());
   }, []);
 
+  const matches = useMediaQuery("(min-width:767px)"); //レスポンシブ設定を定義
+
+
   return (
-    <div >
+    
     <DefaultLayout>
 
-      {/* PCの表示 */}
-			<MediaQuery query="(min-width: 768px)">	
+    {matches ? (
+      <>
         <Grid container spacing={2} sx={{}}>
         <div style={{position: "absolute" ,top: "50%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS", }}>
           <h1 style={{ 
@@ -56,10 +60,10 @@ const Home: NextPage = () => {
             </Link>
         </div>
         </Grid>
-      </MediaQuery>
+      </>
+      ) : (
+      <>
 
-      {/* Mobileの表示 */}
-      <MediaQuery query="(max-width: 767px)">
         <Grid container spacing={2} sx={{}}>
           <div style={{position: "absolute" ,top: "65%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS", }}>
             <h1 style={{ 
@@ -95,10 +99,10 @@ const Home: NextPage = () => {
               </Link>
             </div>
           </Grid>
-      </MediaQuery>
+        </>
+			)}
       
     </DefaultLayout>
-    </div>
   )
 }
 

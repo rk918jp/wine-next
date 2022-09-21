@@ -7,7 +7,8 @@ import {questionsDef, totalQuestionCount} from "../../definitions/consts";
 import {answerQuestion} from "../../redux/reducer/question";
 import {useRouter} from "next/router";
 import Link from "next/link";
-import MediaQuery from "react-responsive";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 
 
@@ -15,6 +16,8 @@ export const Aka: NextPage = () => {
 	const router = useRouter();
 	const questionNum = useAppSelector((state: { question: { questionNum: number; }; }) => state.question.questionNum);
 	const dispatch = useAppDispatch();
+
+	const matches = useMediaQuery("(min-width:767px)"); //レスポンシブ設定を定義
 
 	  // 現在の質問(indexが配列長を超えた場合はundefined)
 	const currentQuestion = questionsDef?.[questionNum];
@@ -36,7 +39,7 @@ export const Aka: NextPage = () => {
 			
 			
 			{/* PCの表示 */}
-			<MediaQuery query="(min-width: 768px)">
+			{/* <MediaQuery query="(min-width: 768px)"> */}
 			{/* 診断終了時の処理 */}
 			{finished ? (
 			<>
@@ -92,7 +95,7 @@ export const Aka: NextPage = () => {
 				</div>
 				</>
 			)}
-		</MediaQuery>
+		{/* </MediaQuery> */}
 
 
 		{/* Mobileの表示 */}

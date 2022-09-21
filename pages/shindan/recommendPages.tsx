@@ -3,26 +3,26 @@ import Head from 'next/head';
 import {DefaultLayout} from "../../layout/DefaultLayout";
 import {Card, CardActionArea, CardContent, CardHeader, CardMedia, Grid, Typography, Button} from "@mui/material";
 import Link from "next/link";
-import MediaQuery from "react-responsive";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 
 const RecommendPages: NextPage = () => {
+	const matches = useMediaQuery("(min-width:767px)"); //レスポンシブ設定を定義
+
 	return (
 		<DefaultLayout>
+			{matches ? (
+				<>
 
-			{/* PCの表示 */}
-		<MediaQuery query="(min-width: 768px)">
+				</>
+				) : (
+				<>
 
-		</MediaQuery>
-		
+	
 
-		
-		{/* Mobileの表示 */}
-		<MediaQuery query="(max-width: 767px)">
-
-		</MediaQuery>
-
-
+				</>
+				)}
 		</DefaultLayout>
 	)
 }

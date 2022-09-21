@@ -7,7 +7,8 @@ import {questionsDef, resultMessageDef, totalQuestionCount,resultImageDef} from 
 import {answerQuestion} from "../../redux/reducer/question";
 import {useRouter} from "next/router";
 import Link from "next/link";
-import MediaQuery from "react-responsive";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 
 export const ResultAka: NextPage = () => {
@@ -16,6 +17,9 @@ export const ResultAka: NextPage = () => {
 
 	const resultMessage = resultMessageDef?.[rank];  //rankに応じた結果の文言
 	const resultImage = resultImageDef?.[rank];
+
+	const matches = useMediaQuery("(min-width:767px)"); //レスポンシブ設定を定義
+
 
 	//   /* 画面をリロードする関数 */
 	// 	const refreshPage = () => {
@@ -26,10 +30,9 @@ export const ResultAka: NextPage = () => {
 	return (
 		<DefaultLayout>
 
-			{/* PCの表示 */}
-			<MediaQuery query="(min-width: 768px)">
-				<div /* style={{position: "absolute" ,top: "55%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS", }} */
-				style={{width: "100%",top: "55%", left: "50%",}}>
+{matches ? (
+			<>
+				<div style={{width: "100%",top: "55%", left: "50%",}}>
 				<Paper sx={{padding: 5}}>
 					<Typography variant={"h5"} style={{fontSize: "3rem"}}>
 						診断結果
@@ -68,13 +71,12 @@ export const ResultAka: NextPage = () => {
 					</Grid>
 				</Paper>
 				</div>
-			</MediaQuery>
+			</>
 
+		) : (
+			<>
 
-			{/* Mobileの表示 */}
-			<MediaQuery query="(max-width: 767px)">
-			<div /* style={{position: "absolute" ,top: "55%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS", }} */
-					style={{width: "100%",top: "55%", left: "50%",}}>
+			<div style={{width: "100%",top: "55%", left: "50%",}}>
 					<Paper sx={{padding: 5}}>
 						<Typography variant={"h5"} style={{fontSize: "2rem"}}>
 							診断結果
@@ -111,8 +113,8 @@ export const ResultAka: NextPage = () => {
 						</Grid>
 					</Paper>
 				</div>
-			</MediaQuery>
-
+			</>
+		)}
 		</DefaultLayout>
 	)
 }

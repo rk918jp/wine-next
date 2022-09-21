@@ -3,77 +3,106 @@ import Head from 'next/head';
 import {DefaultLayout} from "../../layout/DefaultLayout";
 import {Card, CardActionArea, CardContent, CardHeader, CardMedia, Grid, Typography, Button} from "@mui/material";
 import Link from "next/link";
-import MediaQuery from "react-responsive";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import RecommendPages from './recommendPages';
 
+const wineList = [
+  {
+    id: 1,
+    winery: "ワイナリー",
+    wineName: "銘柄",
+    tags: ["タグ1", "タグ2", "タグ3"],
+    description: "Musas sunt abaculuss de varius victrix.",
+  },
+  {
+    id: 2,
+    winery: "ワイナリー",
+    wineName: "銘柄",
+    tags: ["タグ1", "タグ2", "タグ3"],
+    description: "Musas sunt abaculuss de varius victrix.",
+  },
+  {
+    id: 3,
+    winery: "ワイナリー",
+    wineName: "銘柄",
+    tags: ["タグ1", "タグ2", "タグ3"],
+    description: "Musas sunt abaculuss de varius victrix.",
+  },
+  {
+    id: 4,
+    winery: "ワイナリー",
+    wineName: "銘柄",
+    tags: ["タグ1", "タグ2", "タグ3"],
+    description: "Musas sunt abaculuss de varius victrix.",
+  },
+  {
+    id: 5,
+    winery: "ワイナリー",
+    wineName: "銘柄",
+    tags: ["タグ1", "タグ2", "タグ3"],
+    description: "Musas sunt abaculuss de varius victrix.",
+  },
+  {
+    id: 6,
+    winery: "ワイナリー",
+    wineName: "銘柄",
+    tags: ["タグ1", "タグ2", "タグ3"],
+    description: "Musas sunt abaculuss de varius victrix.",
+  }
+]
+
+
 //ワインの品種等掲載
-const WineCard = () => {
-
-
+const WineCard: React.FC<{
+  data: any;
+}> = ({data}) => {
 	return (
-		<Card sx={{textAlign: "left"}}>
-		<CardActionArea onClick={() => {
-			// ワイン詳細ページへ遷移
-		}}>
-
-
-			<CardMedia
-				component="img"
-				height="200"
-				image="/images/shirowine00.jpeg"
-			/>
-			<CardContent>
-			<Typography  gutterBottom>
-				ワイナリー
-			</Typography>
-			<Typography variant="h5">
-				銘柄
-			</Typography>
-			<Typography >
-				タグ1, タグ2, タグ3
-			</Typography>
-			<Typography variant="body2">
-				Musas sunt abaculuss de varius victrix.
-			</Typography>
-			</CardContent>
-		</CardActionArea>
-		</Card>
+		<Link href={`/shindan/${data.id}`}>
+          <Card sx={{textAlign: "left"}}>
+            <CardActionArea>
+              <CardMedia
+                  component="img"
+                  height="200"
+                  image="/images/shirowine00.jpeg"
+              />
+              <CardContent>
+                <Typography  gutterBottom>
+                  {data.winery}
+                </Typography>
+                <Typography variant="h5">
+                  {data.wineName}
+                </Typography>
+                <Typography >
+                  {data.tags && data.tags.join(", ")}
+                </Typography>
+                <Typography variant="body2">
+                  {data.description}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Link>
 	);
 }
 
 
 const Recommend: NextPage = () => {
+  // PCならtrue, mobileならfalse
+  const matches = useMediaQuery("(min-width:767px)");
+
 	return (
 	<DefaultLayout>
 
-		{/* PCの表示 */}
-		<MediaQuery query="(min-width: 768px)">
 			<div style={{width: "100%"}}>
 				<Grid container spacing={2}
 					style={{width: "80%", margin: "0px auto", marginTop:50, marginBottom: 70 }}>
-				{new Array(12).fill(undefined).map((val, idx) => ( //mapでwinecardを複製して並べる処理。
-					<Grid item xs={3} key={idx}>
-						<WineCard />
-					</Grid>
-				))}
+          {wineList.map((wine) => (
+          <Grid item xs={3} key={wine.id}>
+            <WineCard data={wine} />
+          </Grid>
+          ))}
 				</Grid>
 			</div>
-		</MediaQuery>
-
-
-		{/* Mobileの表示 */}
-		<MediaQuery query="(max-width: 767px)">
-		<div style={{width: "100%"}}>
-				<Grid container spacing={2}
-					style={{width: "80%", margin: "0px auto", marginTop:50, marginBottom: 70 }}>
-				{new Array(12).fill(undefined).map((val, idx) => ( //mapでwinecardを複製して並べる処理。
-					<Grid item xs={12} key={idx}>
-						<WineCard />
-					</Grid>
-				))}
-				</Grid>
-			</div>
-		</MediaQuery>
 
 	</DefaultLayout>
 	)
