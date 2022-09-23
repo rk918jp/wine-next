@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "experimentalDecorators": true,
+    "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -13,8 +14,38 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "emitDecoratorMetadata": true,
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
+
+
+// {
+// 	"compilerOptions": {
+// 		"jsx": "react"
+// 	},
+//   "type": "mysql",
+//   "host": "Your DB endpoint",
+//   "port": 3306,
+//   "username": "Your DB username",
+//   "password": "Your DB password",
+//   "database": "Your DB name",
+//   "synchronize": false,
+//   "logging": false,
+//   "entities": [
+//     "src/database/entity/**/*.ts"
+//   ],
+//   "migrations": [
+//     "src/database/migration/**/*.ts"
+//   ],
+//   "subscribers": [
+//     "src/database/subscriber/**/*.ts"
+//   ],
+//   "cli": {
+//     "entitiesDir": "src/database/entity",
+//     "migrationsDir": "src/database/migration",
+//     "subscribersDir": "src/database/subscriber"
+//   }
+// }
