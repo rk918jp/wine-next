@@ -1,51 +1,55 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "target": "es6",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
+    "sourceMap": false,
+    "noImplicitAny": true,
+    "module": "commonjs",
+    "target": "es5",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    "removeComments": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictFunctionTypes": false,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+    },
     "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": [
+    "./src/**/*.ts"
+  ]
 }
 
 
 // {
-// 	"compilerOptions": {
-// 		"jsx": "react"
-// 	},
-//   "type": "mysql",
-//   "host": "Your DB endpoint",
-//   "port": 3306,
-//   "username": "Your DB username",
-//   "password": "Your DB password",
-//   "database": "Your DB name",
-//   "synchronize": false,
-//   "logging": false,
-//   "entities": [
-//     "src/database/entity/**/*.ts"
-//   ],
-//   "migrations": [
-//     "src/database/migration/**/*.ts"
-//   ],
-//   "subscribers": [
-//     "src/database/subscriber/**/*.ts"
-//   ],
-//   "cli": {
-//     "entitiesDir": "src/database/entity",
-//     "migrationsDir": "src/database/migration",
-//     "subscribersDir": "src/database/subscriber"
-//   }
+//   "compilerOptions": {
+//     "experimentalDecorators": true,
+//     "target": "es6",
+//     "lib": ["dom", "dom.iterable", "esnext"],
+//     "allowJs": true,
+//     "skipLibCheck": true,
+//     "strict": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "noEmit": true,
+//     "esModuleInterop": true,
+//     "module": "esnext",
+//     "moduleResolution": "node",
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "jsx": "preserve",
+//     "incremental": true,
+//     "emitDecoratorMetadata": true,
+//   },
+//   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+//   "exclude": ["node_modules"]
 // }

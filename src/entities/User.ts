@@ -1,9 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm'
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  public id: number | undefined
+	public id!: number;
 
   @Column()
   public name: string = ''
