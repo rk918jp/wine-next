@@ -1,5 +1,6 @@
 import {NextPage} from "next";
 import {useRouter} from "next/router";
+import React from "react";
 import {DefaultLayout} from "../../layout/DefaultLayout";
 
 

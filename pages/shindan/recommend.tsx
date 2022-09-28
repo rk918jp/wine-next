@@ -5,6 +5,7 @@ import {Card, CardActionArea, CardContent, CardHeader, CardMedia, Grid, Typograp
 import Link from "next/link";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import RecommendPages from './recommendPages';
+import React from 'react';
 
 const wineList = [
   {
