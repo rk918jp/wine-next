@@ -7,24 +7,24 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 
 
-const RecommendPages: NextPage = () => {
-	const matches = useMediaQuery("(min-width:767px)"); //レスポンシブ設定を定義
+// const RecommendPages: NextPage = () => {
+// 	const matches = useMediaQuery("(min-width:767px)"); //レスポンシブ設定を定義
 
-	return (
-		<DefaultLayout>
-			{matches ? (
-				<>
+// 	return (
+// 		<DefaultLayout>
+// 			{matches ? (
+// 				<>
 
-				</>
-				) : (
-				<>
+// 				</>
+// 				) : (
+// 				<>
 
 	
 
-				</>
-				)}
-		</DefaultLayout>
-	)
-}
+// 				</>
+// 				)}
+// 		</DefaultLayout>
+// 	)
+// }
 
-export default RecommendPages;
+// export default RecommendPages;

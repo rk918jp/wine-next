@@ -1,3 +1,4 @@
+//@ts-nocheck
 import React from "react";
 import {AppBar, Box, Button, Toolbar, Typography, Tabs, Tab, } from "@mui/material";
 import Link from "next/link";
