@@ -19,7 +19,7 @@ export const Aka: NextPage = () => {
 
 	const matches = useMediaQuery("(min-width:767px)"); //レスポンシブ設定を定義
 
-	  // 現在の質問(indexが配列長を超えた場合はundefined)
+	// 現在の質問(indexが配列長を超えた場合はundefined)
 	const currentQuestion = questionsDef?.[questionNum];
 	// 全ての質問を回答したかどうか
 	const finished = questionNum >= questionsDef.length;

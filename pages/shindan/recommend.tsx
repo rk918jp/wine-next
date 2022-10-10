@@ -22,11 +22,12 @@ const WineCard: React.FC<{
               <CardMedia
                   component="img"
                   height="200"
-                  image="/images/shirowine00.jpeg"
+                  image={data.image.src}
+                  // image="/images/shirowine00.jpeg"
               />
               <CardContent>
                 <Typography  gutterBottom>
-                  {data.winery.name}
+                  {data.winery?.name}
                 </Typography>
                 <Typography variant="h5">
                   {data.name}

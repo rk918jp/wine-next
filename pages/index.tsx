@@ -12,13 +12,14 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 
 const Home: NextPage = () => {
-  	//resetの処理を宣言
+  //resetの処理を宣言
 	const dispatch = useAppDispatch();
   React.useEffect(() => {  //ページを開いた時にリセットする   
   dispatch(resetAnswers());
   }, []);
 
-  const matches = useMediaQuery("(min-width:767px)"); //レスポンシブ設定を定義
+//レスポンシブ設定を定義
+const matches = useMediaQuery("(min-width:767px)"); 
 
 
   return (
