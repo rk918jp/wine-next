@@ -5,11 +5,12 @@ import {DefaultLayout} from "../../layout/DefaultLayout";
 import {Card, CardActionArea, CardContent, CardHeader, CardMedia, Grid, Typography, Button} from "@mui/material";
 import Link from "next/link";
 import useMediaQuery from "@mui/material/useMediaQuery";
-// import RecommendPages from './recommendPages';
+import IdPages from './[id]';
 import React from 'react';
 import axios from "axios";
 
 
+const backendBaseUrl = "http://localhost:8080";
 
 //ワインの品種等掲載
 const WineCard: React.FC<{
@@ -22,14 +23,13 @@ const WineCard: React.FC<{
               <CardMedia
                   component="img"
                   height="200"
-                  image={data.image.src}
-                  // image="/images/shirowine00.jpeg"
+                  image={`${backendBaseUrl}${data.image.src}`}
               />
               <CardContent>
                 <Typography  gutterBottom>
                   {data.winery?.name}
                 </Typography>
-                <Typography variant="h5">
+                <Typography variant="h6">
                   {data.name}
                 </Typography>
                 <Typography >
