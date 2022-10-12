@@ -14,17 +14,20 @@ const WineDetail: NextPage = () => {
   //バックエンドとの繋ぎ込み処理
   const [loading , setLoading] = React.useState(false);
   const [wineList, setWineList] = React.useState(null);
+
   React.useEffect(() => {
-    setLoading(true);
-    axios.get("http://localhost:8080/wine/:id",)
-        .then((res) => {
-          const { result, data } = res.data;
-          if (result === "SUCCESS") {
-            setWineList(data);
-          }
-          setLoading(false);
-        });
-  }, []);
+    if (id) {
+      setLoading(true);
+      axios.get(`http://localhost:8080/wine/${id}`)
+          .then((res) => {
+            const { result, data } = res.data;
+            if (result === "SUCCESS") {
+              setWineList(data);
+            }
+            setLoading(false);
+          });
+    }
+  }, [id]);
 
   return (
       <DefaultLayout>

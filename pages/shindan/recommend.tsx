@@ -5,7 +5,6 @@ import {DefaultLayout} from "../../layout/DefaultLayout";
 import {Card, CardActionArea, CardContent, CardHeader, CardMedia, Grid, Typography, Button} from "@mui/material";
 import Link from "next/link";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import IdPages from './[id]';
 import React from 'react';
 import axios from "axios";
 
