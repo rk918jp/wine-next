@@ -15,15 +15,22 @@ const backendBaseUrl = "http://localhost:8080";
 const WineCard: React.FC<{
   data: any;
 }> = ({data}) => {
+
+// PCならtrue, mobileならfalse
+const matches = useMediaQuery("(min-width:767px)");
+
 	return (
 		<Link href={`/shindan/${data.id}`}>
-          <Card sx={{textAlign: "left"}}>
+          <Card sx={{textAlign: "left",height:370}}>
             <CardActionArea>
-              <CardMedia
-                  component="img"
-                  height="200"
-                  image={`${backendBaseUrl}${data.image.src}`}
-              />
+              <Grid sx={{height:"100",width:"200"}}>
+                <CardMedia
+                    component="img"
+                    height="200"
+                    image={`${backendBaseUrl}${data.image.src}`}
+                    sx={{height:"100", width:"auto",marginLeft: 16,}}
+                />
+              </Grid>
               <CardContent>
                 <Typography  gutterBottom>
                   {data.winery?.name}
@@ -36,7 +43,7 @@ const WineCard: React.FC<{
                       data.wineTypes.map((wineType) => wineType.name).join(", ")}
                 </Typography>
                 <Typography variant="body2">
-                  {data.description}
+                  {/* {data.description} */}
                 </Typography>
               </CardContent>
             </CardActionArea>
@@ -76,22 +83,45 @@ const Recommend: NextPage = () => {
 	return (
 	<DefaultLayout>
 
-			<div style={{width: "100%"}}>
-				<Grid container spacing={2} style={{width: "80%", margin: "0px auto", marginTop:50, marginBottom: 70 }}>
-          {loading ? (
-              <>Loading中</>
-          ) : (
-            <>
-              {wineList?.map((wine) => (
-                  <Grid item xs={3} key={wine.id}>
-                    <WineCard data={wine} />
-                  </Grid>
-              ))}
-            </>
-          )}
-				</Grid>
-			</div>
+    {matches ? (
+      <>
 
+        <div style={{width: "100%"}}>
+          <Grid container spacing={2} style={{width: "80%", margin: "0px auto", marginTop:50, marginBottom: 70 }}>
+            {loading ? (
+                <>Loading中</>
+            ) : (
+              <>
+                {wineList?.map((wine) => (
+                    <Grid item xs={3} key={wine.id}>
+                      <WineCard data={wine} />
+                    </Grid>
+                ))}
+              </>
+            )}
+          </Grid>
+        </div>
+      
+      </>
+    ) : (
+      <>
+        <div style={{width: "100%",height: "100%"}}>
+          <Grid container spacing={2} style={{width: "80%", margin: "0px auto", marginTop:10, marginBottom: 70 }}>
+            {loading ? (
+                <>Loading中</>
+            ) : (
+              <>
+                {wineList?.map((wine) => (
+                    <Grid item xs={12} key={wine.id}>
+                      <WineCard data={wine} />
+                    </Grid>
+                ))}
+              </>
+            )}
+          </Grid>
+        </div>
+      </>
+    )}
 	</DefaultLayout>
 	)
 }

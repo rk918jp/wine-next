@@ -3,11 +3,13 @@ import {NextPage} from "next";
 import {DefaultLayout} from "../../layout/DefaultLayout";
 import {Button, Divider, Grid, ImageList, ImageListItem, Paper, Typography} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../redux/hook";
-import {questionsDef, resultMessageDef, totalQuestionCount,resultImageDef} from "../../definitions/consts";
+import {questionsDef, totalQuestionCount,resultImageDef} from "../../definitions/consts";
 import {answerQuestion} from "../../redux/reducer/question";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from "axios";
+
 
 
 
@@ -15,16 +17,39 @@ export const ResultAka: NextPage = () => {
 	const totalPoint = useAppSelector(state => state.question.totalPoint);  //totalPointにquestion＋totalPointを代入
 	const rank = useAppSelector(state => state.question.rank);  //rankにquestion＋rankを代入
 
+
+	const [wineList, setWineList] = React.useState(null);
+  const [loading ] = React.useState(false);
+
+
+	// export const test = wineList
+	React.useEffect(() => {
+    axios.get("http://localhost:8080/wines", {})
+        .then((res) => {
+          const { result, data } = res.data;
+          if (result === "SUCCESS") {
+            setWineList(data);
+          }
+					if (loading) {
+						return <>loading...</>;
+					}
+        });
+  }, []);
+
+
+	const resultMessageDef = [
+		wineList?.filter(wineList => wineList.name)
+	];
+
+	console.log( resultMessageDef);
+
+
+
+	
 	const resultMessage = resultMessageDef?.[rank];  //rankに応じた結果の文言
 	const resultImage = resultImageDef?.[rank];
 
 	const matches = useMediaQuery("(min-width:767px)"); //レスポンシブ設定を定義
-
-
-	//   /* 画面をリロードする関数 */
-	// 	const refreshPage = () => {
-	// 	window.location.reload();
-	// 	};
 
 
 	return (

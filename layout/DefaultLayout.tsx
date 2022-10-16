@@ -68,9 +68,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 							textAlign: "center",
 							margin: "0px auto",
 							width: "100",
-							// position: "relative"
+							height: "100vh"
 						}}>
-					{/* <img src="images/background.jpg" style={{ width: "100%", height:"93vh", backgroundRepeat: "repeat-x"}} /> */}
 					{children}
 				</Box>
 			</>
@@ -118,9 +117,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 							textAlign: "center",
 							margin: "0px auto",
 							width: "100",
-							// position: "relative"
 						}}>
-					{/* <img src="images/background.jpg" style={{ width: "100%", height:"93vh", backgroundRepeat: "repeat-x"}} /> */}
 					{children}
 				</Box>
 				</>
