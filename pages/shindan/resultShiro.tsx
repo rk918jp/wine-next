@@ -1,13 +1,12 @@
 import React from "react";
 import {NextPage} from "next";
 import {DefaultLayout} from "../../layout/DefaultLayout";
-import {Button, Divider, Grid, ImageList, ImageListItem, Paper, Typography} from "@mui/material";
+import {Button, Divider, Grid, Paper, Typography,Box, CardMedia} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../../redux/hook";
-import {questionsDef, resultMessageShiroDef, totalQuestionCount,resultImageShiroDef} from "../../definitions/consts";
-import {answerQuestion} from "../../redux/reducer/question";
-import {useRouter} from "next/router";
+import {questionsDef, resultMessageShiroDef} from "../../definitions/consts";
 import Link from "next/link";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from "axios";
 
 
 
@@ -15,17 +14,29 @@ export const ResultAka: NextPage = () => {
 	const totalPoint = useAppSelector(state => state.question.totalPoint);  //totalPointにquestion＋totalPointを代入
 	const rank = useAppSelector(state => state.question.rank);  //rankにquestion＋rankを代入
 
-	const resultMessage = resultMessageShiroDef?.[rank];  //rankに応じた結果の文言
-	const resultShiro = resultImageShiroDef?.[rank];   //rankに応じた結果のimage
-
 	const matches = useMediaQuery("(min-width:767px)"); //レスポンシブ設定を定義
+	const backendBaseUrl = "http://localhost:8080";
 
+	const [wineList, setWineList] = React.useState(null);
+  const [loading ] = React.useState(false);
 
-	//   /* 画面をリロードする関数 */
-	// 	const refreshPage = () => {
-	// 	window.location.reload();
-	// 	};
+	// export const test = wineList
+	React.useEffect(() => {
+    axios.get("http://localhost:8080/wines", {})
+        .then((res) => {
+          const { result, data } = res.data;
+          if (result === "SUCCESS") {
+            setWineList(data);
+          }
+					if (loading) {
+						return <>loading...</>;
+					}
+        });
+  }, []);
 
+	const resultMessage = wineList?.[rank];  //rankに応じた結果の文言
+	const resultImage = wineList?.[rank];
+	const Message = resultMessageShiroDef?.[rank];  //rankに応じた結果の文言
 
 	return (
 		<DefaultLayout>
@@ -40,14 +51,18 @@ export const ResultAka: NextPage = () => {
 					<Divider sx={{mt: 2, mb: 4}}/>
 						<Typography variant={"h5"} >
 							<p style={{fontSize: "2rem", lineHeight: "0.2em"}}>あなたにおすすめのワインは…</p>
-							<p style={{fontSize: "3rem", fontWeight: "bold", lineHeight: "0.7em"}}>{resultMessage}</p>
+							<p style={{fontSize: "2rem", fontWeight: "bold"}}>{Message}</p>
+							<p style={{fontSize: "3rem", fontWeight: "bold", lineHeight: "1.1em"}}>{resultMessage?.name}</p>
+							<p style={{fontSize: "2rem", fontWeight: "bold", lineHeight: "1.1em"}}>{resultMessage?.oneWord}</p>
 						</Typography>
 
-						<ImageList cols={1}>
-							<ImageListItem style={{width: "30%", margin: "0px auto",}}>
-								<img src={resultShiro} />
-							</ImageListItem>
-						</ImageList>
+						<Box style={{height:"50%",width: "auto", margin: "0px auto",}}>
+								<CardMedia
+											component="img"
+											image={`${backendBaseUrl}${resultImage?.image.src}`} 
+											sx={{height:"auto", width:"8%", margin: "0px auto"}}
+									/>
+							</Box>
 
 					<Grid container sx={{mt: 5}} spacing={2} style={{display: "flex", justifyContent: "center"}}>
 						<Grid item xs={3} >
@@ -82,15 +97,19 @@ export const ResultAka: NextPage = () => {
 						</Typography>
 						<Divider sx={{mt: 2, mb: 4}}/>
 							<Typography variant={"h5"} >
-								<p style={{fontSize: "1.5rem"}}>あなたにおすすめのワインは…</p>
-								<p style={{fontSize: "2.5rem", fontWeight: "bold"}}>{resultMessage}</p>
+								<p style={{fontSize: "1.3rem"}}>あなたにおすすめのワインは…</p>
+								<p style={{fontSize: "1.5rem", fontWeight: "bold"}}>{Message}</p>
+								<p style={{fontSize: "2.5rem", fontWeight: "bold", lineHeight: "1.1em"}}>{resultMessage?.name}</p>
+								<p style={{fontSize: "2rem", fontWeight: "bold", lineHeight: "1.1em"}}>{resultMessage?.oneWord}</p>
 							</Typography>
 
-							<ImageList cols={1}>
-								<ImageListItem style={{width: "100%", margin: "0px auto",}}>
-									<img src={resultShiro} />
-								</ImageListItem>
-							</ImageList>
+							<Box style={{height:"50%",width: "auto", margin: "0px auto",}}>
+								<CardMedia
+											component="img"
+											image={`${backendBaseUrl}${resultImage?.image.src}`} 
+											sx={{height:"auto", width:"50%", margin: "0px auto"}}
+									/>
+							</Box>
 
 						<Grid container sx={{mt: 5}} spacing={2} style={{display:"flex", flexFlow: "column", justifyContent:"space-around",paddingLeft:50}}>
 							<Grid item xs={3} >

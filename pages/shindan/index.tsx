@@ -1,12 +1,12 @@
 import React from "react";
 import {NextPage} from "next";
 import {DefaultLayout} from "../../layout/DefaultLayout";
-import {Button, Divider, Grid, Paper, Typography} from "@mui/material";
+import {Button, Typography,Box} from "@mui/material";
 import Link from "next/link";
 import {useAppDispatch} from "../../redux/hook";
 import {resetAnswers} from "../../redux/reducer/question";
-import styled from "@emotion/styled";
-import MediaQuery from "react-responsive";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
 
 
 const Shindan: NextPage = () => { 
@@ -16,14 +16,18 @@ const Shindan: NextPage = () => {
 		dispatch(resetAnswers());
     }, []);
 
-		return (
-			<DefaultLayout>
 
-				{/* PCの表示 */}
-				<MediaQuery query="(min-width: 768px)">
+	//レスポンシブ設定を定義
+	const matches = useMediaQuery("(min-width:767px)"); 
+
+	return (
+		<DefaultLayout>
+
+		{matches ? (
+      <>
 					<div style={{position: "absolute" ,top: "50%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS",paddingBottom: "150px" }}>
 						<Typography variant={"h5"}>
-							<h1 style={{
+							<Box style={{
 								paddingBottom: "60px", 
 								fontSize: "6rem", 
 								textShadow: "0 0 0.1em rgba(255,255,255,0.05),0.01em 0.04em 0.03em rgba(255,255,255,0.4)", 
@@ -33,7 +37,7 @@ const Shindan: NextPage = () => {
 								WebkitBackgroundClip : "text" 
 								}}>
 								おすすめワイン診断
-							</h1>
+							</Box>
 						</Typography>
 
 						<Link href={"/shindan/aka"} >
@@ -71,14 +75,14 @@ const Shindan: NextPage = () => {
 							</Button>
 						</Link>
 					</div>
-				</MediaQuery>
 
+			</>
+      ) : (
+      <>
 
-				{/* Mobileの表示 */}
-				<MediaQuery query="(max-width: 767px)">
 				<div style={{position: "absolute" ,top: "60%", left: "50%", transform: "translate(-50%,-50%)",fontFamily: "Comic Sans MS",paddingBottom: "150px" }}>
 					<Typography variant={"h5"}>
-						<h1 style={{
+						<Box style={{
 							paddingBottom: "60px", 
 							fontSize: "3.5rem", 
 							textShadow: "0 0 0.1em rgba(255,255,255,0.05),0.01em 0.04em 0.03em rgba(255,255,255,0.4)", 
@@ -89,7 +93,7 @@ const Shindan: NextPage = () => {
 							}}>
 							おすすめ<br></br>
 							ワイン診断
-						</h1>
+						</Box>
 					</Typography>
 
 					<Link href={"/shindan/aka"} >
@@ -126,9 +130,9 @@ const Shindan: NextPage = () => {
 						</Button>
 					</Link>
 					</div>
-				</MediaQuery>
 
-				
+				</>
+			)}
 
 			</DefaultLayout>
 			)

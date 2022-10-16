@@ -2,7 +2,7 @@ import {NextPage} from "next";
 import {useRouter} from "next/router";
 import React from "react";
 import {DefaultLayout} from "../../layout/DefaultLayout";
-import {Card, CardActionArea, CardContent, CardHeader, CardMedia, Grid, Typography, Button,Container ,Box,Link} from "@mui/material";
+import {Card, CardMedia, Typography, Button,Container ,Box,Link} from "@mui/material";
 import axios from "axios";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
